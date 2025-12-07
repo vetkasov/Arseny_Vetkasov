@@ -13,8 +13,13 @@ random.seed(SEED)
 np.random.seed(SEED)
 
 def improved_lightgbm_solution():
-    train_df = pd.read_csv('train.csv')
-    test_df = pd.read_csv('test.csv')
+    import os
+
+    DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+
+    train_df = pd.read_csv(os.path.join(DATA_DIR, "train.csv"))
+    test_df = pd.read_csv(os.path.join(DATA_DIR, "test.csv"))
+
 
     def preprocess_text(text):
         if pd.isna(text):
@@ -157,7 +162,6 @@ def improved_lightgbm_solution():
     val_pred = model.predict(X_val)
     from sklearn.metrics import mean_squared_error
     val_rmse = np.sqrt(mean_squared_error(y_val, val_pred))
-    print(f"RMSE: {val_rmse:.4f}")
 
     predictions = model.predict(X_test)
 
@@ -174,8 +178,7 @@ def improved_lightgbm_solution():
         'prediction': predictions
     })
 
-    submission.to_csv('result.csv', index=False)
-    print("Файл сохранён: result.csv")
+    submission.to_csv("result/submission.csv", index=False)
 
     return submission
 
