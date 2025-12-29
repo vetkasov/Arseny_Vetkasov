@@ -418,7 +418,7 @@ for i in range(len(test_lower_final)):
 submission = sample_submission.copy()
 submission['price_p05'] = test_lower_final
 submission['price_p95'] = test_upper_final
-submission.to_csv('results/submission_final.csv', index=False)
+submission.to_csv('results/sample_submission.csv', index=False)
 
 
 
